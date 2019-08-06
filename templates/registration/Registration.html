@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+
+{% block title %}
+  Registration
+{% endblock title %}
+  
+
+
+
+{% block content %}
+<section id="login" class="bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <h2 class="border-bottom mb-4">User registration</h2>
+        <p> If you already have an account, you can
+          <a href="http://django-unicorn.herokuapp.com/accounts/login/">sign in</a></p>
+
+          <---do poprawy------>
+
+
+        <form method="post" class="lead">{% csrf_token %}
+
+<div id="div_id_email" class="form-group"> <label for="id_email" class="col-form-label  requiredField">
+                {{form.as_p}}
+
+          <button type="submit" class="btn btn-default">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+  
+{% endblock content %}
+  
+
+
+  
