@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<section id="forms">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              
+  <h2 class="mb-4"> Create or edit issue </h2>
+  <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+      <div id="div_id_issue_type" class="form-group  ">         
+              <label for="id_issue_type" class="control-label required-field ">
+                  Issue type
+              </label>
+                      <h2>Service</h2>
+                                       
+  
+      </div>
+      <div id="div_id_title" class="form-group  ">         
+              <label for="id_title" class="control-label required-field ">
+                  Title
+              </label>                 
+                  <div class="">
+                      <input type="text" name="title" maxlength="200" class=" form-control" required="" id="id_title">                                           
+                  </div>
+      </div>
+      <div id="div_id_content" class="form-group  ">
+              <label for="id_content" class="control-label required-field ">
+                  Content
+              </label>
+                  <div class="">
+                      <textarea name="content" cols="40" rows="10" class=" form-control" required="" id="id_content"></textarea>
+                  </div>
+      </div>
+      
+      <div id="div_id_tag" class="form-group  ">
+  <label for="id_tag" class="control-label  ">
+                  Priority
+              </label>
+       <div class="">
+        <select name="priority" id="id_priority" class="form-control">
+          <option value="critical" selected="">critical</option>
+          <option value="important">important</option>
+          <option value="medium">medium</option>
+        </select>
+                      
+                  </div>
+              
+          
+      </div>
+      <div id="div_id_image" class="form-group  ">          
+        <label for="id_image" class="control-label">
+            Image
+        </label>   
+    <div class="">
+                <input type="file" name="image" accept="image/*"  id="id_image">
+            </div>
+          </div>
+  
+  
+  
+    <button type="submit" class="form-inline btn btn-warning text-white">Submit</button>
+      <a href="/services/" class="form-inline btn btn-warning text-white"> Back
+    </a>
+  </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
+{% endblock content %}
+    

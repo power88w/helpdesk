@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Signup',
+    'services',
     'login',
+    'Signup',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR,'templates'),
+                os.path.join(BASE_DIR,'templates/blog'),
                 os.path.join(BASE_DIR,'Signup/templates/signup'),
                 ],
         'APP_DIRS': True,

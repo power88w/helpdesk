@@ -1,0 +1,54 @@
+
+<a href=" {{blog.id}} ">
+    <div class="card mb-1 issue-shadow">
+      
+      <div class="bg-gray">
+        
+        <div class="col-lg-12 p-3">
+          <span class="float-left mr-2">
+            <div 
+            {% if blog.status == "waiting"  %}
+            class="badge badge-secondary"  
+            {% elif blog.status == "in progress" %}
+            class = "badge badge-warning"
+            {% else %}
+            class = "badge badge-success"
+            {% endif %}
+            > 
+            {{blog.status}}
+            
+          </div>
+          {% if blog.status == "waiting"  %}
+          <span
+      {% if blog.priority == "important"  %}
+            class="badge badge-secondary"  
+            {% elif blog.status == "critical" %}
+            class = "badge badge-warning"
+            {% else %}
+            class = "badge badge-success"
+            {% endif %}
+        >{{blog.priority}}
+      {% endif %}</span>  
+          </span>
+          <div class="ml-1 float-right">
+            {{blog.votes}} <i class="fa fa-hand-paper-o"></i></div>
+          <b>{{blog.title}} </b>
+          <br>
+          <span class="text-muted">
+            <i class="fa fa-bug"></i>
+            
+            {{blog.id}}
+            Opened on:
+            <i>{{blog.posted_time}}</i>
+            by
+            <i>{{blog.user}}</i>
+          </span>
+          <div class="float-right">
+            {{blog.views}} <i class="fa fa-eye"></i>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+  </a>

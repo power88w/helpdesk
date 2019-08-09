@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+    
+  
+{% block title  %}
+    Detail Services
+{% endblock title %}
+  
+{% block content %}
+    <section id="forms">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+<span class="btn btn-warning float-right">
+  <a href="/services/{{Blog.id}}/like/" class="text-white">Vote {{Blog.votes}}</a>
+  <i class="fa fa-hand-pointer-o text-white"></i>
+</span>
+<span class="btn btn-warning float-right">
+  <span class ='text-white'>  View {{Blog.views}}</span>
+  <i class="fa fa-eye text-white"></i>
+</span>
+
+<h3>{{Blog.title}}</h3>
+<div class="card mt-4">
+  <div class="card-header">
+    <span class="float-left mr-2">
+      
+      <div 
+      {% if Blog.status == "waiting"  %}
+            class="badge badge-secondary"  
+            {% elif Blog.status == "in progress" %}
+            class = "badge badge-warning"
+            {% else %}
+            class = "badge badge-success"
+            {% endif %}
+      >{{Blog.status}}</div>
+      {% if Blog.status == "waiting" %}
+      <span
+      {% if Blog.priority == "important"  %}
+            class="badge badge-secondary"  
+            {% elif Blog.status == "critical" %}
+            class = "badge badge-warning"
+            {% else %}
+            class = "badge badge-success"
+            {% endif %}
+        >{{Blog.priority}}
+      {% endif %}</span>  
+      
+      
+      
+    </span>
+    
+    Opened on:
+    <i>{{Blog.posted_time}}</i>
+    by
+    <i>{{Blog.user}}</i>
+    
+  </div>
+  <div class="card-body">
+    {{Blog.content}}
+    
+    <br>
+    <br>
+    
+    {% if Blog.images %}
+      <img src="/media/{{Blog.images}}" alt="image"/>  
+    {% endif %}
+      
+    
+    
+  </div>
+</div>
+</div>
+</div>
+<div class="col-lg-8 mx-auto">
+  <h4 class="mt-4"> Comments: </h4>
+</div>
+
+
+
+
+
+  <nav aria-label="comment pagination" class="mt-5">
+    <ul class="pagination">
+      <div class='container'>
+      {% for comment in comments %}
+      {% include 'detail-comment.html' with comment=comment truncate=True detail=False %}  
+      {% endfor %}       
+    </div>
+     </ul>
+  </nav>
+  <div class="pagination">
+      <span class="step-links">
+          {% if comments.has_previous %}
+              <a href="?page=1">&laquo; first</a>
+              <a href="?page={{ comments.previous_page_number }}">previous</a>
+          {% endif %}
+  
+          <span class="current">
+              Page {{ comments.number }} of {{ comments.paginator.num_pages }}.
+          </span>
+          {% if comments.has_next %}
+              <a href="?page={{ comments.next_page_number }}">next</a>
+              <a href="?page={{ comments.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+      </span>
+  </div>
+  
+
+<div class="col-lg-8 mx-auto">
+  <div class="btn btn-warning float-right mt-2">
+    <a href="/services/{{Blog.id}}/add/" class="text-white"> Add comment </a>
+  </div>
+  <div class="btn btn-warning float-left mt-2">
+    
+    <a href="/services/" class="text-white">Go back to bug list</a>
+    
+  </div>
+</div>
+          </div>  
+    </section>
+{% endblock content %}
+        
+    

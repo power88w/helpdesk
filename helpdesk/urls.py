@@ -16,11 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .views import home_page
-
+from django.conf import settings
+from services.views import Blog_Post_Create_Page
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("",home_page),
+    path("services-new/", Blog_Post_Create_Page),
+    path('services/', include('services.urls')),
     path('admin/', admin.site.urls),
     path('login/', include('login.urls')),
     path('signup/', include('Signup.urls')),
 ]
+
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
