@@ -1,0 +1,44 @@
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<section id="features" class="bg-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h3>Hardware Replacement Requests</h3>
+          <div class="col"><img class="float-right" style="height: 80px" src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.lighthouseconferencing.com%2Fwp-content%2Fuploads%2F2015%2F08%2FAdditional-features-Document-comparison-and-questionnaires.png&f=1" alt=""></div>
+          <p class="lead text-justify">Take a quick look at this graph that is showing total
+            replacements categorized by their status (charts are updated live):
+          </p>
+          
+          {% autoescape off %}
+            {{fc}}
+          {% endautoescape %}
+          
+                
+         </section>
+  <section id="bugs">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2>Service Requests</h2>
+          <div class="col"><img class="float-right" style="height: 80px" src="#" alt=""></div>
+          <p class="lead text-justify">Also here you can find graph of total services that were
+            posted and categorized by their status on this site. You can always
+            come back here to check how project is progressing </p>
+          {{bc|safe}}
+        </div>
+      </div>
+    </div>
+  </section>
+  
+{% endblock content %}
+  
+
+
+
+
+    

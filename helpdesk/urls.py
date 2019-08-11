@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import home_page
+from .views import home_page,charts
 from django.conf import settings
 from services.views import Blog_Post_Create_Page
+from hardware import views
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -27,6 +28,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', include('login.urls')),
     path('signup/', include('Signup.urls')),
+    path('hardware/', include('hardware.urls')),
+    path("hardware-new/",views.Blog_Post_Create_Page),
+    path('cart/',include('cart.urls')),
+    path('charts/',charts),
 ]
 
 

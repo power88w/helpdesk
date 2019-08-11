@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'services',
     'login',
     'Signup',
+    'hardware',
+    'cart',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +63,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR,'templates'),
                 os.path.join(BASE_DIR,'templates/blog'),
+                os.path.join(BASE_DIR,'templates/hardware'),
                 os.path.join(BASE_DIR,'Signup/templates/signup'),
                 ],
         'APP_DIRS': True,
@@ -144,5 +148,9 @@ MEDIA_URL = '/media/' # django-storages
 
 ########### $$$$$$$$ ################
 
+BRAINTREE_PRODUCTION = config('BRAINTERE_PRODUCTION',default=False)
+BRAINTREE_MERCHANT_ID = config('BRAINTREE_MERCHANT_ID')
+BRAINTREE_PUBLIC_KEY = config('BRAINTREE_PUBLIC_KEY')
+BRAINTREE_PRIVATE_KEY = config('BRAINTREE_PRIVATE_KEY')
 
 ########### promotion ###############

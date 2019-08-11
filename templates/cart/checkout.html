@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Checkout
+{% endblock title %}
+    
+
+
+{% block scripts %}
+
+<script src="https://js.braintreegateway.com/web/dropin/1.18.0/js/dropin.min.js"></script>
+
+<!--
+<script>
+  // Remember? You generated the client token in your view.
+  var braintree_client_token = "{{ braintree_client_token }}";
+
+  requirejs(['jquery', 'jsi18n', 'https://js.braintreegateway.com/js/braintree-2.28.0.min.js'], function($, jsi18n, braintree) {
+      function braintreeSetup() {
+          // Here you tell Braintree to add the drop-in to your division above
+          braintree.setup(braintree_client_token, "dropin", {
+              container: "braintree-dropin"
+              ,onError: function (obj) {
+                  // Errors will be added to the html code
+                  $('[type=submit]').prop('disabled', false);
+                  $('.braintree-notifications').html('<p class="alert alert-danger">' + obj.message + '</p>');
+              }
+          });
+      }
+      braintreeSetup();
+      $('form').submit(function () {
+          $('[type=submit]').prop('disabled', true);
+          $('.braintree-notifications').html('');
+      });
+  });
+</script>-->  
+{% endblock scripts %}
+  
+
+{% block content %}
+<section id="forms">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+<div class="test">
+<div class="block d-sm-none"></div>
+<div class="wrapper ">
+  <h1>Payment Details</h1>
+  <form role="form" method="post" id="payment-form" autocomplete="off">{% csrf_token %}
+    <div class="margin-b-30">
+      <div class="card mt-5"> 
+      <div class="card-header jenter warning ">
+        <h4>Summary</h4>
+      </div>
+      <div class="card-body ">
+        <table class="table table-small ">
+          <tbody><tr class="bottom-border">
+            <th>Name</th>
+            <th>Price</th>
+          </tr>
+          {% for session in sessions %}
+          <tr>
+              <td> {{session.name}} </td>
+              <td>$ {{session.price}} </td>
+            </tr>  
+          {% endfor %}
+        </tbody></table>
+        <hr>
+      </div>
+          <div class="form-group float-right">
+            <h3 class="float-left ml-4">Total: $ {{total}} </h3></div>
+            {% if braintree_error %}
+    <div class="alert alert-danger fade in">
+        <button class="close" data-dismiss="alert">&times;</button>
+        {{ braintree_error|safe }}
+    </div>
+  {% endif %}
+  <div class="braintree-notifications"></div>
+  <div id="braintree-dropin"></div>
+  <input  id="submit-button" class="btn btn-success btn-lg btn-block" type="button" value="Pay now!" />
+</form>
+     </form>
+    </div>
+  </div>
+            </div>
+          </div>
+        </div>
+</section>
+<script>
+    var braintree_client_token = "{{ braintree_client_token }}";
+    var button = document.querySelector('#submit-button');
+
+    braintree.dropin.create({
+      authorization: braintree_client_token,
+      container: '#braintree-dropin',
+      card: {
+        cardholderName: {
+            required: false
+        }
+      }
+    }, function (createErr, instance) {
+        button.addEventListener('click', function () {
+            instance.requestPaymentMethod(function (err, payload) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart/payment/',
+                    data: {'paymentMethodNonce': payload.nonce,
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'}
+                }).done(function (result) {
+                   setTimeout(window.location.href = "/",500)
+                });
+            });
+        });
+    });
+</script>
+{% endblock content %}
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="div_id_credit_card_number" class="form-group  ">
+  <label for="id_credit_card_number" class="control-label  ">
+                Credit card number
+            </label>
+                <div class="">
+                    <input type="text" name="credit_card_number" class=" form-control" id="id_credit_card_number" required>
+                </div>
+    </div>
+    <div id="div_id_cvv" class="form-group  ">
+            <label for="id_cvv" class="control-label  ">
+                Security code (CVV)
+            </label>
+                <div class="">
+                    <input type="text" name="cvv" class=" form-control" id="id_cvv" required>
+                </div>
+    </div>
+
+<div id="div_id_expiry_month" class="form-group  ">
+<label for="id_expiry_month" class="control-label  ">
+       Month
+</label>
+<div class="">
+<select name="expiry_month" class=" form-control" id="id_expiry_month">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+</select>
+</div>
+</div>
+<div id="div_id_expiry_year" class="form-group  ">
+    <label for="id_expiry_year" class="control-label  ">
+        Year
+    </label>             
+<div class="">
+<select name="expiry_year" class=" form-control" id="id_expiry_year">
+<option value="2019">2019</option>
+<option value="2020">2020</option>
+<option value="2021">2021</option>
+<option value="2022">2022</option>
+<option value="2023">2023</option>
+<option value="2024">2024</option>
+<option value="2025">2025</option>
+<option value="2026">2026</option>
+<option value="2027">2027</option>
+<option value="2028">2028</option>
+<option value="2029">2029</option>
+<option value="2030">2030</option>
+<option value="2031">2031</option>
+<option value="2032">2032</option>
+<option value="2033">2033</option>
+<option value="2034">2034</option>
+<option value="2035">2035</option>
+<option value="2036">2036</option>
+<option value="2037">2037</option>
+<option value="2038">2038</option>
+<option value="2039">2039</option>
+<option value="2040">2040</option>
+<option value="2041">2041</option>
+<option value="2042">2042</option>
+<option value="2043">2043</option>
+<option value="2044">2044</option>
+<option value="2045">2045</option>
+<option value="2046">2046</option>
+<option value="2047">2047</option>
+<option value="2048">2048</option>
+<option value="2049">2049</option>
+<option value="2050">2050</option>
+<option value="2051">2051</option>
+<option value="2052">2052</option>
+<option value="2053">2053</option>
+<option value="2054">2054</option>
+<option value="2055">2055</option>
+<option value="2056">2056</option>
+<option value="2057">2057</option>
+<option value="2058">2058</option>
+<option value="2059">2059</option>
+</select>
+    </div>
+  </div>
+ <input type="hidden" name="stripe_id" class=" form-control" id="id_stripe_id">
+</div>

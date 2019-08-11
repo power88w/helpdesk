@@ -21,15 +21,15 @@ class BlogPost(models.Model):
     posted_time = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     status_CHOICES = [
-        (waiting, 'waiting'),
-        (in_progress, 'in progress'),
-        (completed, 'completed'),
-    ]
+                        (waiting, 'waiting'),
+                        (in_progress, 'in progress'),
+                        (completed, 'completed'),
+                     ]
     status = models.CharField(
-        max_length=20,
-        choices=status_CHOICES,
-        default=waiting,
-    )
+                              max_length=20,
+                              choices=status_CHOICES,
+                              default=waiting,
+                             )
     priority_CHOICES = [
         ("critical", "critical"),
         ("important", "important"),
@@ -44,17 +44,14 @@ class BlogPost(models.Model):
     def __str__(self):
         return self.title
 
-
 class BlogComment(models.Model):
     Comment = models.TextField(null=True, blank=True)
     user = models.ForeignKey(User, related_name='poster', default=1,
                              on_delete=models.CASCADE)
     Blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
     posted_time = models.DateTimeField(auto_now=False, auto_now_add=True)
-
     def __str__(self):
         return ("Comment_" + str(self.Blog) + "_" + str(self.user))
-
 
 class BlogStats(models.Model):
     user = models.ForeignKey(User, related_name='rater', default=1,
@@ -62,6 +59,5 @@ class BlogStats(models.Model):
     blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
     rating = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
-
     def __str__(self):
         return str(self.user) + str(self.blog)

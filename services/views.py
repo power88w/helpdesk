@@ -5,10 +5,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import BlogPost, BlogComment, BlogStats
 from django.core.paginator import Paginator
 from django.core.files.storage import FileSystemStorage
+from hardware.models import BlogPost as fbp
+from cart.models import session
 from django.db import IntegrityError
 
-
-################# DETAIL Blog##############
+################# DETAIL BLOG##############
 
 def Blog_Post_Detail_Page(request, post_id):
     obj = get_object_or_404(BlogPost, id=post_id)
@@ -72,7 +73,6 @@ def Create_Comment(request, post_id):
     context = {}
     return render(request, template_name, context)
 
-
 ###############  Edit Comment #########
 @login_required(login_url='/login/accounts/login')
 def Edit_Comment(request, comment_id):
@@ -116,4 +116,22 @@ def Blog_Like(request, post_id):
         a.save()
     return redirect("/services/" + str(from_blog.id) + "/")
 
-
+############# Donate ############
+@login_required(login_url='/login/accounts/login')
+def Donate(request):
+    template = "blog/donate.html"
+    prev=0
+    if request.POST:
+        try:
+            a=fbp.objects.create(title="donate")
+            session.objects.create(user=request.user, name=a,rate=request.POST.get("money"))
+            return redirect("/cart/")
+        except IntegrityError:
+            a=fbp.objects.get(title="donate")
+            prev=a.value
+            a.delete()
+            a=fbp.objects.create(title="donate")
+            session.objects.create(user=request.user, name=a,rate=request.POST.get("money"))
+            return redirect("/cart/")
+    context = {"pre_val":prev}
+    return render(request,template,context)

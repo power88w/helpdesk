@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{%load staticfiles %}
+
+
+
+{% block title %}
+    Cart
+{% endblock title %}
+    
+
+
+{% block content %}
+
+<section id="forms">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              
+  <h1>Your cart</h1>
+  
+  
+  {% if count %}
+
+  <div class="card mt-5">
+        <div class="card-header jenter">
+          Summary
+        </div>
+        <div class="card-body ">
+        
+        {% if sessions %}
+        <table class="table table-small ">
+            <tbody><tr class="bottom-border">
+              <th>Items</th>
+              <th>votes</th>
+              <th>Price</th>
+              <th>Action</th>
+            </tr>
+        {% endif %}
+          
+          
+            
+            {% for session in sessions %}
+                
+                {% if session != donation %}
+                <tr>
+                    <td><a href="/features/{{session.name.id}}/">{{session.name}}</a></td>
+                    <td> {{session.votes}}   </td>
+                    <td>{{session.price}}</td>
+                    <td class="form-inline">
+                      <form class="ml-2 form-inline" method="post" action="/cart/{{session.id}}/sub_vote/">{% csrf_token %}
+                        
+                        <button type="submit" class="btn btn-warning text-white btn-sm form-inline">
+                          <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                      </form>
+                      <form class="ml-2 form-inline" method="post" action="/cart/{{session.id}}/add_vote/"> {% csrf_token %}
+                        <button type="submit" class="btn btn-warning text-white btn-sm form-inline ">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                      </form>
+                      <form class="ml-2" method="post" action="/cart/{{session.id}}/remove/">{% csrf_token %}
+                        <input name="quantity" type="hidden" value="{{session.votes}}">
+                        <button type="submit" class="btn btn-danger text-white btn-sm form-inline">
+                          <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                  {% endif %}
+            {% endfor %}
+        </tbody></table>
+        <hr>
+      {% if donation %}
+      <table class="table table-small">
+      <tr class="bottom-border">
+          <h3 style="text-align: center"><strong>Donation</strong></h3>
+          </tr>
+            
+            <tr class="bottom-border"><th>
+              Money : {{donation.price}} $</th >
+              <td style="padding-left: 14%">
+                  <form class="ml-2" method="post" action="/cart/{{donation.id}}/remove/">{% csrf_token %}
+                    <button type="submit" class="btn btn-danger text-white btn-sm form-inline" >
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                  </form> 
+              </td>
+            </tr>
+            </table>
+      {% endif %}
+        </div>
+        <div style="background-color: whitesmoke">
+      <div class="form-group">
+            <h3 class="float-left ml-4">Total: $ {{total}}  </h3>
+            <a href="/cart/checkout/" class="float-right btn btn-success mr-5" role="button" required>Checkout <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+          </div>
+        </div>  
+        </div>
+        <div class="mt-5"> </div>
+        </div>
+        </div>
+        </div>
+        
+                
+
+  {% else %}    
+    <div class="card-body mt-5">
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Nothing in cart!</h4>
+            <p>You have nothing in your cart yet. </p>
+            <hr>
+            <p class="mb-0">Try to navigate to features and maybe you will find
+            something you want to purchase ?</p>
+            <p>If you don't know already we are selling votes for features that will
+            be implemented in future.</p>
+            <p class="mb-0"> Thank You for your support ! </p>
+        </div>
+    </div>  
+    
+    {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+  
+
+{% block script %}
+$(document).ready(function () {
+  $('#chck')
+
+
+{% endblock script %}
+  
