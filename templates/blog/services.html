@@ -24,6 +24,9 @@
       <h2>Services requested</h2>
     </div>
     </form>
+    <a href="/services/donate/"><button class="btn btn-success float-right text-white">Donate<i class="fa fa-wrench"></i></button>
+
+    </a>
   <div class="col"><img class="float-right" style="height: 80px" src="#" alt=""></div>
   <div style="clear:both"></div>
   <both></both>
@@ -31,8 +34,8 @@
   {% for object in objects %}
     {% include 'services-inline.html' with blog=object truncate=True detail=False %}
   {% endfor %}
-  
-</div>   
+
+</div>
 
 
 <!--################# PAGINATION #############-->
@@ -42,7 +45,7 @@
               <a href="?page=1">&laquo; first</a>
               <a href="?page={{ objects.previous_page_number }}">previous</a>
           {% endif %}
-  
+
           <span class="current">
               Page {{ objects.number }} of {{ objects.paginator.num_pages }}.
           </span>
@@ -59,3 +62,4 @@
 </section>
 
 {% endblock content %}
+

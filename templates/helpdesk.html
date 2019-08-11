@@ -3,8 +3,6 @@
 
 
 {% block title %}
-  
-  Home Page - Unicorn
 
 {% endblock title %}
 
@@ -13,6 +11,57 @@
 
 {% block content %}
 
+<section>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2 class="mb-5 text-justify">What do we do</h2>
+          We provide technical services on demand. With a team of highly trained indivuals in the field
+          we provide services in both hardware and software domains. To acquire our expertise:
+          <ul>
+            <li> Post a comment in "Request Services" </li>
+            <li> post your issues </li>
+            <li> upvote so that it takes higher priority </li>
+            <li> Donate to support the team</li>
+          </ul>
+        </div>
+        <div class="col-lg-8 mx-auto mt-5">
+          <h5>Top 3 services requested<span class="badge badge-success">free</span></h5>
+          <br>
+          <table class="table">
+            <th>
+            <td><b>Bug title</b></td>
+            <td><b>Upvote Number</b></td>
+            </th>
 
+          {% for row in  rows_services %}
+            {% include 'helpdesk-inline.html' with blog=row truncate=True detail=False  %}
+          {% endfor %}
+
+          </table>
+
+          </div>
+          <div class="col-lg-8 mx-auto mt-5">
+            <h5>Top 3 hardware replacement requested <span class="badge badge-warning">Paid</span></h5>
+            <br>
+            <table class="table">
+              <th>
+              <td><b>Feature title</b></td>
+              <td><b>Upvote Number</b></td>
+              <td><b>Total $ paid</b></td>
+              </th>
+
+              {% for row in  rows_hardware %}
+              {% include 'helpdesk-inline.html' with blog=row truncate=True detail=False  %}
+            {% endfor %}
+            </table>
+            <br>
+            The higher upvote number is the <span class="bg-warning">higher
+              priority for implemeting new feature or fixing a bug. </span>
+            <br>
+            <br>
+
+        </div>
+      </div>
+  </section>
 {% endblock content %}
-     

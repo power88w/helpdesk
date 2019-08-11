@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import pygal
 from services.models import BlogPost as bbp
-
+from hardware.models import BlogPost as fbp
+import operator
 
 
 def home_page(request):
@@ -32,7 +34,7 @@ def charts(request):
     pie_chart2.add('waiting', fw)
     pie_chart2.add('in progress', fp)
     pie_chart2.add('completed', fc)
-    feature = pie_chart2.render()
-    bugs = pie_chart1.render()
-    context = {"fc":feature.decode('utf-8'),'bc':bugs.decode('utf-8')}
+    hardware = pie_chart2.render()
+    services = pie_chart1.render()
+    context = {"fc":hardware.decode('utf-8'),'bc':services.decode('utf-8')}
     return render(request,"charts.html",context)

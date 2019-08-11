@@ -1,32 +1,32 @@
 from django.shortcuts import render
 from .forms import BlogPostCreateForm
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import BlogPost, BlogComment, BlogStats
+from django.shortcuts import render,get_object_or_404,redirect
+from .models import BlogPost,BlogComment,BlogStats
 from django.core.paginator import Paginator
 from django.core.files.storage import FileSystemStorage
 from hardware.models import BlogPost as fbp
 from cart.models import session
 from django.db import IntegrityError
 
-################# DETAIL BLOG##############
+################# DETAIL Blog##############
 
-def Blog_Post_Detail_Page(request, post_id):
-    obj = get_object_or_404(BlogPost, id=post_id)
+def Blog_Post_Detail_Page(request,post_id):
+    obj =  get_object_or_404(BlogPost, id=post_id)
     com_obj = BlogComment.objects.filter(Blog=obj)
     paginator = Paginator(com_obj, 5)
     page = request.GET.get('page')
     comments = paginator.get_page(page)
-    template_name = 'services-detail.html'
+    template_name='services-detail.html'
     ## view ###
     if not request.user.is_anonymous:
-        query_visit = BlogStats.objects.filter(blog=obj, user=request.user)
-        if query_visit.count() == 0:
-            obj.views += 1
+        query_visit=BlogStats.objects.filter(blog=obj,user=request.user)
+        if query_visit.count()==0:
+            obj.views+=1
             obj.save()
-            BlogStats(blog=obj, user=request.user, views=1).save()
-    context = {"Blog": obj, "title": "Detail", "comments": comments}
-    return render(request, template_name, context)
+            BlogStats(blog=obj,user=request.user,views=1).save()
+    context={"Blog":obj,"title":"Detail","comments":comments}
+    return render(request,template_name,context)
 
 
 ################# CREATE BLOG ##############
@@ -40,81 +40,100 @@ def Blog_Post_Create_Page(request):
             image = request.FILES['image']
             fs = FileSystemStorage()
             mi = fs.save(image.name, image)
-            BlogPost(title=title, priority=pr, content=content, images=mi, user=request.user).save()
+            BlogPost(title=title,priority=pr,content=content,images=mi,user=request.user).save()
         else:
-            BlogPost(user=request.user, title=title, priority=pr, content=content).save()
+            BlogPost(user=request.user,title=title,priority=pr,content=content).save()
         return redirect('/services/')
-    template_name = "create.html"
+    template_name="create.html"
     context = {}
-    return render(request, template_name, context)
+    return render(request,template_name,context)
 
+'''################# EDIT BLOG ###################
+def Blog_Post_Edit_Page(request,post_slug):
+    obj = get_object_or_404(BlogPost,slug=post_slug)
+    form = BlogPostCreateForm(request.POST or None, request.FILES or None,instance=obj)
+    if form.is_valid():
+        form.save()
+    template_name="blog/edit.html"
+    context = {"form":form,'title':f"Upadate {obj.title}"}
+    return render(request,template_name,context)
 
+################# DELETE BLOG ##############
+@login_required
+def Blog_Post_Delete_Page(request,post_slug):
+    obj =  get_object_or_404(BlogPost, slug=post_slug)
+    if request.method=="POST":
+        obj.delete()
+        return redirect("/blog")
+    template_name="services.html"
+    context = {"object":obj}
+    return render(request,template_name,context)
+'''
 ################# LIST BLOG ################
 
 def Blog_Post_List_Page(request):
     objs = BlogPost.objects.order_by('posted_time')[::-1]
     paginator = Paginator(objs, 5)
-    template_name = "services.html"
+    template_name="services.html"
     page = request.GET.get('page')
     blogs = paginator.get_page(page)
-    context = {"objects": blogs}
-    return render(request, template_name, context)
-
+    context = {"objects":blogs}
+    return render(request,template_name,context)
 
 ##############  New Comment  ##########
 @login_required(login_url='/login/accounts/login')
-def Create_Comment(request, post_id):
+def Create_Comment(request,post_id):
     if request.POST:
-        newComment = BlogComment(user=request.user, Comment=request.POST['comment'],
-                                 Blog_id=post_id)
+        newComment = BlogComment(user = request.user, Comment = request.POST['comment'],
+                                    Blog_id=post_id)
         newComment.save()
-        return redirect("/services/" + post_id + "/")
+        return redirect("/services/"+post_id+"/")
     template_name = "blog/create_comment.html"
-    context = {}
-    return render(request, template_name, context)
+    context={}
+    return render(request,template_name,context)
 
 ###############  Edit Comment #########
 @login_required(login_url='/login/accounts/login')
-def Edit_Comment(request, comment_id):
-    comment = get_object_or_404(BlogComment, id=comment_id)
+def Edit_Comment(request,comment_id):
+    comment = get_object_or_404(BlogComment,id= comment_id)
     blog = comment.Blog
     if request.POST:
         comment.Comment = request.POST["edited_comment"]
         comment.save()
-        return redirect("/services/" + str(blog.slug) + "/")
+        return redirect("/services/"+str(blog.slug)+"/")
     template_name = "blog/edit_comment.html"
-    context = {"comment_to_edit": comment.Comment}
-    return render(request, template_name, context)
-
+    context = {"comment_to_edit":comment.Comment}
+    return render(request,template_name,context)
 
 ############## Comment Delete ###############
 @login_required(login_url='/login/accounts/login')
-def Delete_Comment(request, comment_id):
-    comment = get_object_or_404(BlogComment, id=comment_id)
+def Delete_Comment(request,comment_id):
+    comment = get_object_or_404(BlogComment,id= comment_id)
     blog = comment.Blog
     if request.POST:
         comment.delete()
-        return redirect("/services/" + str(blog.slug) + "/")
+        return redirect("/services/"+str(blog.slug)+"/")
     template_name = "blog/delete_comment.html"
-    return render(request, template_name)
+    return render(request,template_name)
 
 
 ############# BLOG UPVOTE ###############
 @login_required(login_url='/login/accounts/login')
-def Blog_Like(request, post_id):
-    from_blog = get_object_or_404(BlogPost, id=post_id)
-    a = get_object_or_404(BlogStats, blog=from_blog, user=request.user)
-    if a.rating == 1:
-        from_blog.votes -= 1
+def  Blog_Like(request,post_id):
+    from_blog=get_object_or_404(BlogPost,id=post_id)
+    a=get_object_or_404(BlogStats,blog=from_blog,user=request.user)
+    if a.rating==1:
+        from_blog.votes -=1
         from_blog.save()
-        a.rating = 0
+        a.rating =0
         a.save()
-    elif a.rating == 0:
-        from_blog.votes += 1
+    elif a.rating==0:
+        from_blog.votes +=1
         from_blog.save()
-        a.rating = 1
+        a.rating =1
         a.save()
-    return redirect("/services/" + str(from_blog.id) + "/")
+    return redirect("/services/"+str(from_blog.id)+"/")
+
 
 ############# Donate ############
 @login_required(login_url='/login/accounts/login')

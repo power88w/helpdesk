@@ -5,10 +5,12 @@ from .views import (Blog_Post_Detail_Page,
                    #Blog_Post_Delete_Page,
                    #Blog_Post_Edit_Page,
                    Create_Comment,
-                   Blog_Like)
-
+                   Blog_Like,
+                   Donate)
+from cart.views import Cart_Fill
 urlpatterns = [
         path("",Blog_Post_List_Page),
+        path("donate/",Donate),
         path("<str:post_id>/",Blog_Post_Detail_Page),
         path("<str:post_id>/like/",Blog_Like),
         path("<str:post_id>/add/",Create_Comment),
