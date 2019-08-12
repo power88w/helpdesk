@@ -12,7 +12,12 @@ def home_page(request):
         blogs = bbp.objects.order_by('votes')[bc-3::-1]
     else:
         blogs = bbp.objects.order_by('votes')[::-1]
-    context = {'rows_services':blogs,}
+    fc = fbp.objects.all().count()
+    if fc > 3:
+        hardware = fbp.objects.order_by('votes')[fc-3::-1]
+    else:
+        hardware = fbp.objects.order_by('votes')[::-1]
+    context = {'rows_services':blogs,'rows_hardware':hardware}
     return render(request,"helpdesk.html",context)
 
 
