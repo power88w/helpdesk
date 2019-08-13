@@ -20,6 +20,7 @@ from django.conf import settings
 from services.views import Blog_Post_Create_Page
 from hardware import views
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path("",home_page),

@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/power88w/helpdesk.svg?branch=master)](https://travis-ci.org/power88w/helpdesk)
