@@ -16,6 +16,7 @@ dnspython==1.16.0
 docutils==0.14
 Flask==1.0.2
 Flask-PyMongo==2.3.0
+gunicorn==19.9.0
 idna==2.8
 isort==4.3.9
 itsdangerous==1.1.0
@@ -45,4 +46,3 @@ urllib3==1.25.3
 virtualenv==16.7.2
 Werkzeug==0.14.1
 wrapt==1.11.1
-gunicorn-19.9.0
