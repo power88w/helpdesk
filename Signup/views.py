@@ -36,7 +36,7 @@ def signup(request):
             )
             email.send()
 
-            return HttpResponse('Please confirm your email address to complete the registration'), redirect('/')
+            return redirect('/')
 
     else:
         form = SignupForm()
