@@ -36,11 +36,11 @@ def signup(request):
             )
             email.send()
 
-            return redirect('/')
+            return HttpResponse('Please confirm your email address to complete the registration')
 
     else:
         form = SignupForm()
-    return render(request, 'registration/registration.html', {'form': form})
+    return redirect('/hardware/')
 
 
 def activate(request, uidb64, token):
