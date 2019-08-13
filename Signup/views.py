@@ -19,7 +19,7 @@ def signup(request):
         if form.is_valid():
             user = form.save(commit=False)
             print(form)
-            user.is_active = False
+            user.is_active = True
             user.save()
             current_site = get_current_site(request)
             mail_subject = 'Activate your blog account.'
