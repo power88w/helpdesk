@@ -45,3 +45,4 @@ urllib3==1.25.3
 virtualenv==16.7.2
 Werkzeug==0.14.1
 wrapt==1.11.1
+gunicorn-19.9.0
