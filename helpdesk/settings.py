@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG',cast=bool,default=True)
 
-ALLOWED_HOSTS = ['helpdeskappp.herokuapp.com']
+ALLOWED_HOSTS = ['helpdeskappp.herokuapp.com', '127.0.0.2']
 
 
 # Application definition
