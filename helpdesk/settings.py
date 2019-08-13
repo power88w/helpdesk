@@ -135,7 +135,7 @@ USE_TZ = True
 
 ############### Email Verification   ##################3
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = config('EMAIL_USE_TLS',default=False)
 EMAIL_HOST = config('EMAIL_HOST',default="")
 EMAIL_HOST_USER = config('EMAIL_HOST_USER',default="")

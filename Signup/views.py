@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from .forms import SignupForm
@@ -19,7 +19,7 @@ def signup(request):
         if form.is_valid():
             user = form.save(commit=False)
             print(form)
-            user.is_active = True
+            user.is_active = False
             user.save()
             current_site = get_current_site(request)
             mail_subject = 'Activate your blog account.'
@@ -36,7 +36,7 @@ def signup(request):
             )
             email.send()
 
-            return redirect('/')
+            return HttpResponse('Please confirm your email address to complete the registration')
 
     else:
         form = SignupForm()
