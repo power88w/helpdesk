@@ -55,6 +55,7 @@ def Blog_Post_Create_Page(request):
     return render(request, template_name, context)
 
 
+
 ################# LIST BLOG ################
 
 def Blog_Post_List_Page(request):

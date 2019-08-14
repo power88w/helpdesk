@@ -1,10 +1,11 @@
 from django.db import models
 from django.conf import settings
-
+from helpdesk.storage_backends import MediaStorage
 # Create your models here.
 
 
 User = settings.AUTH_USER_MODEL
+
 
 
 class BlogPost(models.Model):
@@ -14,7 +15,7 @@ class BlogPost(models.Model):
     user = models.ForeignKey(User, related_name='author', default=1, on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
     content = models.TextField(null=True, blank=True)
-    images = models.ImageField(blank=True, null=True)
+    images = models.ImageField(blank=True, null=True, storage=MediaStorage())
     votes = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     followers = models.IntegerField(default=0)
@@ -43,6 +44,7 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class BlogComment(models.Model):
     Comment = models.TextField(null=True, blank=True)

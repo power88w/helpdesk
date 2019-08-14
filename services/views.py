@@ -8,6 +8,8 @@ from django.core.files.storage import FileSystemStorage
 from hardware.models import BlogPost as fbp
 from cart.models import session
 from django.db import IntegrityError
+from helpdesk.settings import BUCKET, s3
+# from boto.s3.key import Key
 
 ################# DETAIL Blog##############
 
@@ -28,7 +30,6 @@ def Blog_Post_Detail_Page(request,post_id):
     context={"Blog":obj,"title":"Detail","comments":comments}
     return render(request,template_name,context)
 
-
 ################# CREATE BLOG ##############
 @login_required(login_url='/login/accounts/login')
 def Blog_Post_Create_Page(request):
@@ -38,9 +39,11 @@ def Blog_Post_Create_Page(request):
         pr = request.POST.get('priority')
         if request.FILES:
             image = request.FILES['image']
-            fs = FileSystemStorage()
-            mi = fs.save(image.name, image)
-            BlogPost(title=title,priority=pr,content=content,images=mi,user=request.user).save()
+            # save ima
+            # s3.upload_file(image.read(), BUCKET, image.name)
+            # fs = FileSystemStorage()
+            # mi = fs.save(image.name, image)
+            BlogPost(title=title,priority=pr,content=content,images=image,user=request.user).save()
         else:
             BlogPost(user=request.user,title=title,priority=pr,content=content).save()
         return redirect('/services/')
@@ -48,7 +51,7 @@ def Blog_Post_Create_Page(request):
     context = {}
     return render(request,template_name,context)
 
-################# LIST BLOG ################
+#################  LIST BLOG ################
 
 def Blog_Post_List_Page(request):
     objs = BlogPost.objects.order_by('posted_time')[::-1]

@@ -22,9 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG',cast=bool,default=True)
+DEBUG = True#config('DEBUG',cast=bool,default=True)
 
-ALLOWED_HOSTS = ['helpdeskappp.herokuapp.com', '127.0.0.2']
+ALLOWED_HOSTS = ['helpdeskappp.herokuapp.com', '*']
 
 
 # Application definition
@@ -163,11 +163,13 @@ STATICFILES_DIRS=[
 
 
 MEDIAFILES_LOCATION = 'media'
-DEFAULT_FILE_STORAGE = 'helpdesk.storage_backends.MediaStorage'
+DEFAULT_FILE_STORAGE = 'helpdesko.storage_backends.MediaStorage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/' # django-storages
-
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/' # django-storages
+MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_ROOT = MEDIA_URL
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
@@ -179,3 +181,9 @@ BRAINTREE_PUBLIC_KEY = config('BRAINTREE_PUBLIC_KEY')
 BRAINTREE_PRIVATE_KEY = config('BRAINTREE_PRIVATE_KEY')
 
 ########### promotion ############
+
+
+# storage
+import boto3
+s3 = boto3.client('s3')
+BUCKET = AWS_STORAGE_BUCKET_NAME
