@@ -181,9 +181,3 @@ BRAINTREE_PUBLIC_KEY = config('BRAINTREE_PUBLIC_KEY')
 BRAINTREE_PRIVATE_KEY = config('BRAINTREE_PRIVATE_KEY')
 
 ########### promotion ############
-
-
-# storage
-import boto3
-s3 = boto3.client('s3')
-BUCKET = AWS_STORAGE_BUCKET_NAME

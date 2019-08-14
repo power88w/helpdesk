@@ -15,7 +15,7 @@ class BlogPost(models.Model):
     user = models.ForeignKey(User, related_name='author', default=1, on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
     content = models.TextField(null=True, blank=True)
-    images = models.ImageField(blank=True, null=True, storage=MediaStorage())
+    images = models.ImageField(blank=True, null=True, storage=MediaStorage(), upload_to='media')
     votes = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     followers = models.IntegerField(default=0)

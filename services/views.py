@@ -8,8 +8,6 @@ from django.core.files.storage import FileSystemStorage
 from hardware.models import BlogPost as fbp
 from cart.models import session
 from django.db import IntegrityError
-from helpdesk.settings import BUCKET, s3
-# from boto.s3.key import Key
 
 ################# DETAIL Blog##############
 
