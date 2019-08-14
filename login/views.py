@@ -3,7 +3,6 @@ from django.contrib.auth import authenticate,logout
 from django.contrib.auth import login as auth_login
 # Create your views here.
 
-
 def userloginview(request):
     if request.POST:
         username = request.POST.get('username')

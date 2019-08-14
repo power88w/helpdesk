@@ -42,7 +42,6 @@ def signup(request):
         form = SignupForm()
     return render(request, 'registration/registration.html', {'form': form})
 
-
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))

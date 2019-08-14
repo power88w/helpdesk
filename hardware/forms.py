@@ -4,7 +4,7 @@ from .models import BlogPost
 class BlogPostCreateForm(forms.ModelForm):
     class Meta:
         model = BlogPost
-        fields = ('title','content','images')        
+        fields = ('title','content','images')
 
 
     def clean_title(self, *args, **kwargs):
@@ -16,5 +16,3 @@ class BlogPostCreateForm(forms.ModelForm):
         if qs.exists():
             raise forms.ValidationError("This title has already been used. Please try again.")
         return title
-
-

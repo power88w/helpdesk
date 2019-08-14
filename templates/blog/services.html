@@ -1,46 +1,37 @@
-{% extends 'base.html' %}
-    
-{% block content %}
-    <section id="forms">
-        <div class="container">
-          <div class="row">
+{% extends 'base.html' %} {% block content %}
+<section id="forms">
+    <div class="container">
+        <div class="row">
             <div class="col-lg-8 mx-auto">
-              
-  <div class="mr-auto">
-  
- {% if not user.is_authenticated  %}
-  <form action="\login\accounts\login">
-  {% else %}  
-  <form action="\services-new\">
-  {% endif %}
-      <button class="btn btn-warning float-right text-white " type="submit" value="This is a button link"> Add
-          {% if not user.is_authenticated  %}
-          <a href="\login\"> </a>
-          {% else %}
-          <a href="\services-new\"></a>
-          {% endif %}
-        <i class="fa fa-wrench"></i>
-      </button>
-      <h2>Services requested</h2>
-    </div>
-    </form>
-    <a href="/services/donate/"><button class="btn btn-success float-right text-white">Donate<i class="fa fa-wrench"></i></button>
+                <div class="mr-auto">
+                    {% if not user.is_authenticated %}
+                    <form action="\login\accounts\login">
+                        {% else %}
+                        <form action="\services-new\">
+                            {% endif %}
+                            <button class="btn btn-warning float-right text-white " type="submit" value="This is a button link"> Add {% if not user.is_authenticated %}
+                                <a href="\login\"> </a>
+                                {% else %}
+                                <a href="\services-new\"></a>
+                                {% endif %}
+                                <i class="fa fa-wrench"></i>
+                            </button>
+                            <h2>Services requested</h2>
+                </div>
+                        </form>
+                <a href="/services/donate/">
+                    <button class="btn btn-success float-right text-white">Donate<i class="fa fa-wrench"></i></button>
 
-    </a>
-  <div class="col"><img class="float-right" style="height: 80px" src="#" alt=""></div>
-  <div style="clear:both"></div>
-  <both></both>
-  <div class = 'container'>
-  {% for object in objects %}
-    {% include 'services-inline.html' with blog=object truncate=True detail=False %}
-  {% endfor %}
-
-</div>
-
-
-<!--################# PAGINATION #############-->
-<div class="pagination">
-      <span class="step-links">
+                </a>
+                <div class="col"><img class="float-right" style="height: 80px" src="#" alt=""></div>
+                <div style="clear:both"></div>
+                <both></both>
+                <div class='container'>
+                    {% for object in objects %} {% include 'services-inline.html' with blog=object truncate=True detail=False %} {% endfor %}
+                </div>
+                <!--################# PAGINATION #############-->
+                <div class="pagination">
+                    <span class="step-links">
           {% if objects.has_previous %}
               <a href="?page=1">&laquo; first</a>
               <a href="?page={{ objects.previous_page_number }}">previous</a>
@@ -48,18 +39,15 @@
 
           <span class="current">
               Page {{ objects.number }} of {{ objects.paginator.num_pages }}.
-          </span>
-          {% if objects.has_next %}
-              <a href="?page={{ objects.next_page_number }}">next</a>
-              <a href="?page={{ objects.paginator.num_pages }}">last &raquo;</a>
-          {% endif %}
-      </span>
-  </div>
-      </div>
+          </span> {% if objects.has_next %}
+                    <a href="?page={{ objects.next_page_number }}">next</a>
+                    <a href="?page={{ objects.paginator.num_pages }}">last &raquo;</a> {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
 </section>
 
 {% endblock content %}
-

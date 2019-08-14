@@ -6,7 +6,6 @@ class BlogPostCreateForm(forms.ModelForm):
         model = BlogPost
         fields = ('title','content','images')        
 
-
     def clean_title(self, *args, **kwargs):
         instance = self.instance
         title = self.cleaned_data.get('title')

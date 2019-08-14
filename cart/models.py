@@ -8,7 +8,6 @@ from hardware.models import BlogPost
 
 User = settings.AUTH_USER_MODEL
 
-
 # session just represents the row of cart
 class session(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='customer')
@@ -18,7 +17,6 @@ class session(models.Model):
 
     def price(self):
         return self.votes * self.rate
-
     def __str__(self):
         return str(self.user) + "-" + str(self.name)
 
@@ -45,7 +43,6 @@ class Cart(models.Model):
     def delete_cart(sender, instance, **kwargs):
         if not session.objects.filter(user=instance.user):
             instance.user.cart.delete()
-
 
         else:
             sessions = session.objects.filter(user=instance.user)

@@ -1,5 +1,3 @@
-from django.shortcuts import render
-from .forms import BlogPostCreateForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import BlogPost, BlogComment, BlogStats
@@ -55,32 +53,6 @@ def Blog_Post_Create_Page(request):
     template_name = "hardware/create.html"
     context = {}
     return render(request, template_name, context)
-
-
-'''
-################# EDIT BLOG ###################
-
-def Blog_Post_Edit_Page(request,post_slug):
-    obj = get_object_or_404(BlogPost,slug=post_slug)
-    form = BlogPostCreateForm(request.POST or None, request.FILES or None,instance=obj)
-    if form.is_valid():
-        form.save()
-    template_name="hardware/edit.html"
-    context = {"form":form,'title':f"Upadate {obj.title}"}
-    return render(request,template_name,context)
-
-################# DELETE BLOG ##############
-
-@login_required(login_url='/login/accounts/login')
-def Blog_Post_Delete_Page(request,post_slug):
-    obj =  get_object_or_404(BlogPost, slug=post_slug)
-    if request.method=="POST":
-        obj.delete()
-        return redirect("/hardware/")
-    template_name="hardware.html"
-    context = {"object":obj}
-    return render(request,template_name,context)
-'''
 
 
 ################# LIST BLOG ################

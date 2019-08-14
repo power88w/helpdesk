@@ -7,7 +7,6 @@ from .views import (Blog_Post_Detail_Page,
                    Create_Comment,
                    Blog_Like,
                    Donate)
-from cart.views import Cart_Fill
 urlpatterns = [
         path("",Blog_Post_List_Page),
         path("donate/",Donate),

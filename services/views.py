@@ -48,27 +48,6 @@ def Blog_Post_Create_Page(request):
     context = {}
     return render(request,template_name,context)
 
-'''################# EDIT BLOG ###################
-def Blog_Post_Edit_Page(request,post_slug):
-    obj = get_object_or_404(BlogPost,slug=post_slug)
-    form = BlogPostCreateForm(request.POST or None, request.FILES or None,instance=obj)
-    if form.is_valid():
-        form.save()
-    template_name="blog/edit.html"
-    context = {"form":form,'title':f"Upadate {obj.title}"}
-    return render(request,template_name,context)
-
-################# DELETE BLOG ##############
-@login_required
-def Blog_Post_Delete_Page(request,post_slug):
-    obj =  get_object_or_404(BlogPost, slug=post_slug)
-    if request.method=="POST":
-        obj.delete()
-        return redirect("/blog")
-    template_name="services.html"
-    context = {"object":obj}
-    return render(request,template_name,context)
-'''
 ################# LIST BLOG ################
 
 def Blog_Post_List_Page(request):

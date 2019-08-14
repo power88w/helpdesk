@@ -1,18 +1,13 @@
 {% extends 'base.html' %}
-
 {% load static %}
 {% block title %}
     Donate
 {% endblock title %}
-
-
 {% block content %}
-  
 <section id="forms">
         <div class="container">
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              
   <h1>Donations</h1>
   <form method="POST" action=".">{% csrf_token %}
         <div class="card mt-5">
@@ -24,24 +19,17 @@
                       <th>Action</th>
                     </tr>
                     <tr>
-                            <td>The Team</td>
-                            <td><input type="number" name="money" required>   </td>
-                            <td><button class="btn btn-secondary" type="submit"required>Donate</button></td>
-                          </tr>        
+                        <td>The Team</td>
+                        <td><input type="number" name="money" required>   </td>
+                        <td><button class="btn btn-secondary" type="submit"required>Donate</button></td>
+                    </tr>
                     </tbody></table>
             </div></div></form>
-            
-                  
             </div>
         </div>
     </div>
 </section>
-
-
-
 {% endblock content %}
-    
-
 {% block scripts %}
     $(documents)
 {% endblock scripts %}

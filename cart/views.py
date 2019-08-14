@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import session
 from hardware.models import BlogPost, BlogStats
 import braintree
 from helpdesk import settings
 from . import forms
-from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import generic
 
@@ -120,19 +118,6 @@ def payment(request):
     return redirect("/cart/complete/")
 
 
-'''
-def payment_view(request):
-    if request.method == 'GET':
-        request.session['braintree_client_token'] = braintree.ClientToken.generate()
-        …   
-        return render(request, ‘path/to/payment_template.html’)
-    else:  # We assume this is a ‘POST’ request.
-        if not form.is_valid():
-            return render(render, ‘path/to/payment_template.html’)
-        else:  # The transaction can be finalized.
-'''
-
-
 @login_required(login_url='/login/accounts/login')
 def Complete(request):
     ses = session.objects.filter(user=request.user)
@@ -179,21 +164,15 @@ class CheckoutView(generic.FormView):
         self.braintree_client_token = braintree.ClientToken.generate({})
         return super(CheckoutView, self).dispatch(request, *args, **kwargs)
 
-        def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs):
             ctx = super(CheckoutView, self).get_context_data(**kwargs)
             ctx.update({
                 'braintree_client_token': self.braintree_client_token,
             })
             return ctx
-            '''
-            ses = session.objects.filter(user=request.user)
-            total = 0
-            for s in ses:
-                total += s.price()
-            ctx.update({"sessions":ses,"total":total})
-            '''
 
-        def form_valid(self, form):
+
+    def form_valid(self, form):
             # Braintree customer info
             # You can, for sure, use several approaches to gather customer infos
             # For now, we'll simply use the given data of the user instance
@@ -287,6 +266,9 @@ class CheckoutView(generic.FormView):
             # or do whatever makes you and your customers happy :)
             return super(CheckoutView, self).form_valid(form)
 
-        def get_success_url(self):
+    def get_success_url(self):
             # Add your preferred success url
             return redirect('/cart/complete/')
+
+
+

@@ -1,9 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 import pygal
 from services.models import BlogPost as bbp
 from hardware.models import BlogPost as fbp
-import operator
 
 
 def home_page(request):
@@ -19,7 +17,6 @@ def home_page(request):
         hardware = fbp.objects.order_by('votes')[::-1]
     context = {'rows_services':blogs,'rows_hardware':hardware}
     return render(request,"helpdesk.html",context)
-
 
 
 def charts(request):

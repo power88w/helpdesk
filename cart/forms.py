@@ -1,18 +1,13 @@
-'''Add a simple form, which includes the hidden payment nonce field.
-You might want to add other fields like an address, quantity or
-an amount.
-''' 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-
 
 class CheckoutForm(forms.Form):
     payment_method_nonce = forms.CharField(
         max_length=1000,
         widget=forms.widgets.HiddenInput,
-        required=False,  # In the end it's a required field, but I wanted to provide a custom exception message
+        required=False,
     )
-    
+
     def clean(self):
         self.cleaned_data = super(CheckoutForm, self).clean()
         # Braintree nonce is missing

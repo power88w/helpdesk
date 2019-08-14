@@ -1,40 +1,30 @@
-{% extends 'base.html' %}
-
-
-
-{% block title %}
-  New Comment
-{% endblock title %}
-  
-{% block content %}
+{% extends 'base.html' %} {% block title %} New Comment {% endblock title %} {% block content %}
 <section id="forms">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 mx-auto">
-        
-<h2 class="mb-4"> Add comment </h2>
-<form method="POST" method='.' enctype="multipart/form-data">{% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
 
+                <h2 class="mb-4"> Add comment </h2>
+                <form method="POST" method='.' enctype="multipart/form-data">{% csrf_token %}
 
-<div id="div_id_comment" class="form-group has-error ">
+                    <div id="div_id_comment" class="form-group has-error ">
 
-    
-        <label for="id_comment" class="control-label required-field ">
-            Comment
-        </label>
-            <div class="">
-                <textarea name="comment" cols="5" rows="10" class=" form-control" required="" id="id_comment"></textarea>
-                
-<span id="error_id_comment_1" class="error-msg">This field is required.</span>                   
-            </div>       
-</div>
-<button type="submit" class="form-inline btn btn-warning text-white">Submit</button>   
-<a href="/hardware/{{blog}}" class="form-inline btn btn-warning text-white"> Back
+                        <label for="id_comment" class="control-label required-field ">
+                            Comment
+                        </label>
+                        <div class="">
+                            <textarea name="comment" cols="5" rows="10" class=" form-control" required="" id="id_comment"></textarea>
+
+                            <span id="error_id_comment_1" class="error-msg">This field is required.</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="form-inline btn btn-warning text-white">Submit</button>
+                    <a href="/hardware/{{blog}}" class="form-inline btn btn-warning text-white"> Back
 </a>
-</form>
-      </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 {% endblock content %}
