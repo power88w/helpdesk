@@ -3,14 +3,14 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <h2 class="mb-4"> Create or edit issue </h2>
+                <h2 class="helpdesk mb-4"> Create Ticket </h2>
                 <form method="POST" enctype="multipart/form-data">{% csrf_token %}
                     <div id="div_id_issue_type" class="form-group  ">
                         <label for="id_issue_type" class="control-label required-field ">
                             Issue type
                         </label>
                     </div>
-                    <h2>Hardware Replacement</h2>
+                    <h2 class="helpdesk small-size">Hardware Replacement</h2>
                     <div id="div_id_title" class="form-group  ">
                         <label for="id_title" class="control-label required-field ">
                             Title
@@ -48,8 +48,8 @@
                             <input type="file" name="image" accept="image/*" id="id_image">
                         </div>
                     </div>
-                    <button type="submit" class="form-inline btn btn-warning text-white">Submit</button>
-                    <a href="/hardware/" class="form-inline btn btn-warning text-white"> Back
+                    <button type="submit" class="form-inline btn btn-dark text-white">Submit</button>
+                    <a href="/hardware/" class="form-inline btn btn-dark text-white"> Back
                     </a>
                 </form>
             </div>

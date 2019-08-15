@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %} {% block content %}
 <section id="forms">
     <div class="container">
@@ -9,18 +10,18 @@
                         {% else %}
                         <form action="\services-new\">
                             {% endif %}
-                            <button class="btn btn-warning float-right text-white " type="submit" value="This is a button link"> Add {% if not user.is_authenticated %}
+                            <button class="border-danger btn donation btn-primary float-right text-white " type="submit" value="This is a button link"> Add {% if not user.is_authenticated %}
                                 <a href="\login\"> </a>
                                 {% else %}
                                 <a href="\services-new\"></a>
                                 {% endif %}
-                                <i class="fa fa-wrench"></i>
+                                <i class="fa fa-plus"></i>
                             </button>
-                            <h2>Services requested</h2>
+                            <h2 class="text-center helpdesk">Services requested</h2>
                 </div>
                         </form>
                 <a href="/services/donate/">
-                    <button class="btn btn-success float-right text-white">Donate<i class="fa fa-wrench"></i></button>
+                    <button class="donation border-danger btn btn-success float-right text-white">Donate <i class="fa fa-euro"></i></button>
 
                 </a>
                 <div class="col"><img class="float-right" style="height: 80px" src="#" alt=""></div>
@@ -47,7 +48,6 @@
             </div>
         </div>
     </div>
-
 </section>
 
 {% endblock content %}

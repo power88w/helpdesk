@@ -3,17 +3,17 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <span class="btn btn-warning float-right">
+                <span class="btn btn-secondary float-right">
   <a href="/services/{{Blog.id}}/like/" class="text-white">Vote {{Blog.votes}}</a>
-  <i class="fa fa-hand-pointer-o text-white"></i>
+  <i class="fa fa-thumbs-up text-white"></i>
 </span>
-                <span class="btn btn-warning float-right">
+                <span class="btn btn-info float-right">
   <span class ='text-white'>  View {{Blog.views}}</span>
-                <i class="fa fa-eye text-white"></i>
+                <i class="fa fa-binoculars text-white"></i>
                 </span>
-                <h3>{{Blog.title}}</h3>
-                <div class="card mt-4">
-                    <div class="card-header">
+                <h3 class="helpdesk">{{Blog.title}}</h3>
+                <div class="border-danger card mt-4">
+                    <div class=" border-danger card-header">
                         <span class="float-left mr-2">
       <div
       {% if Blog.status == "waiting"  %}
@@ -24,14 +24,14 @@
             class = "badge badge-success"
             {% endif %}
       >{{Blog.status}}</div>
-      {% if Blog.status == "waiting" %}
+      {% if Blog.status != "test" %}
       <span
       {% if Blog.priority == "important"  %}
-            class="badge badge-secondary"
-            {% elif Blog.status == "critical" %}
-            class = "badge badge-warning"
+            class="badge badge-warning"
+            {% elif Blog.status == "medium" %}
+            class = "badge badge-primary"
             {% else %}
-            class = "badge badge-success"
+            class = "badge badge-danger"
             {% endif %}
         >{{Blog.priority}}
       {% endif %}</span>
@@ -40,17 +40,17 @@
                         <i>{{Blog.posted_time}}</i> by
                         <i>{{Blog.user}}</i>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body border-danger">
                         {{Blog.content}}
                         <br>
                         <br> {% if Blog.images %}
-                        <img src="https://helpdesko.s3-eu-west-1.amazonaws.com/{{Blog.images}}" alt="image" /> {% endif %}
+                        <img class="align-items-center" style="max-width: 600px" src="https://helpdesko.s3-eu-west-1.amazonaws.com/{{Blog.images}}" alt="image" /> {% endif %}
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-lg-8 mx-auto">
-            <h4 class="mt-4"> Comments: </h4>
+            <h4 class="mt-4 helpdesk"> Comments: </h4>
         </div>
         <nav aria-label="comment pagination" class="mt-5">
             <ul class="pagination">
@@ -73,11 +73,11 @@
             </span>
         </div>
         <div class="col-lg-8 mx-auto">
-            <div class="btn btn-warning float-right mt-2">
+            <div class="btn btn-dark donation border-danger float-right mt-2">
                 <a href="/services/{{Blog.id}}/add/" class="text-white"> Add comment </a>
             </div>
-            <div class="btn btn-warning float-left mt-2">
-                <a href="/services/" class="text-white">Go back to bug list</a>
+            <div class="btn btn-dark donation border-danger float-left mt-2">
+                <a href="/services/" class="text-white">Back to list</a>
             </div>
         </div>
     </div>

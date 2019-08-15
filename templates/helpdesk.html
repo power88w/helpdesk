@@ -2,22 +2,29 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="card border-success col-lg-8 mx-auto">
+            <div class="card border-danger col-lg-8 mx-auto">
                 <div id="title" class="card-header">
                     <h2 class="mb-5 text-center helpdesk">IT Ticketing Web Application</h2>
                 </div>
                 <div class="card-body text-danger">
                     Ticketing system supports and helps you to better manage your help desk processes from first contact to resolution. Help ticketing system includes everything you need for ticket management including:
                     <ul>
-                        <li> Post a comment in "Request Services" </li>
-                        <li> Post a comment in "Request Services" </li>
-                        <li> post your issues </li>
-                        <li> upvote so that it takes higher priority </li>
-                        <li> Donate to support the team</li>
+                        <h4 class="helpdesk small-size">As a user (employee)</h4>
+                        <li> I have the option of opening tickets and ordering an IT service. </li>
+                        <li> I have the option of adding a problem image, screenshots. </li>
+                        <li> I have the opportunity to comment on the problem. </li>
+                        <li> I have the option of leaving a tip. </li>
+                        <li> I have the option of ordering new equipment </li>
+                        <h4 class="helpdesk small-size">As IT:</h4>
+                        <li> I check the status of individual tickets</li>
+                        <li> I can close completed tasks.</li>
+                        <li> I can easily locate the problem</li>
+                        <li> Observe the progress of your work based on graphs</li>
+                        <li> I have the ability to create orders based on employee request</li>
                     </ul>
                 </div>
             </div>
-            <div class="card text-center col-lg-8 mx-auto mt-5">
+            <div class="card text-center border-danger col-lg-8 mx-auto mt-5">
                 <h5 class="helpdesk " id="title">Top 3 services requested <span class="badge badge-success">free</span></h5>
                 <br>
                 <table class="table">
@@ -28,7 +35,7 @@
                     {% for row in rows_services %} {% include 'helpdesk-inline.html' with blog=row truncate=True detail=False %} {% endfor %}
                 </table>
             </div>
-            <div class="card text-center col-lg-8 mx-auto mt-5">
+            <div class="card border-danger text-center col-lg-8 mx-auto mt-5">
                 <h5 class="helpdesk" id="title">Top 3 hardware replacement requested <span class="badge badge-warning">Paid</span></h5>
                 <br>
                 <table class="table">
@@ -39,8 +46,7 @@
                     </th>
                     {% for row in rows_hardware %} {% include 'helpdesk-inline.html' with blog=row truncate=True detail=False %} {% endfor %}
                 </table>
-                <br> The higher upvote number is the <span class="bg-warning">higher
-              priority for implemeting new feature or fixing a bug. </span>
+                <br> There is a possibility of voting for the exchange of equipment, but in this case the votes are paid, the more votes will get the ticket will be closed earlier.
                 <br>
                 <br>
             </div>

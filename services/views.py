@@ -1,11 +1,8 @@
-from django.shortcuts import render
-from .forms import BlogPostCreateForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import BlogPost,BlogComment,BlogStats
 from django.core.paginator import Paginator
-from django.core.files.storage import FileSystemStorage
-from hardware.models import BlogPost as fbp
+from services.models import BlogPost as fbp
 from cart.models import session
 from django.db import IntegrityError
 

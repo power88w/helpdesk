@@ -2,9 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import BlogPost, BlogComment, BlogStats
 from django.core.paginator import Paginator
-from django.core.files.storage import FileSystemStorage
+from hardware.models import BlogPost as fbp
 from cart.models import session, Cart
-
+from django.db import IntegrityError
 
 # Create your views here.
 
@@ -44,9 +44,7 @@ def Blog_Post_Create_Page(request):
         pr = request.POST.get('priority')
         if request.FILES:
             image = request.FILES['image']
-            fs = FileSystemStorage()
-            mi = fs.save(image.name, image)
-            BlogPost(title=title, priority=pr, content=content, images=mi, user=request.user).save()
+            BlogPost(title=title, priority=pr, content=content, images=image, user=request.user).save()
         else:
             BlogPost(title=title, priority=pr, content=content, user=request.user).save()
         return redirect('/hardware/')

@@ -3,13 +3,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <h2 class="mb-4"> Create or edit issue </h2>
+                <h2 class="mb-4 helpdesk"> Create ticket </h2>
                 <form method="POST" enctype="multipart/form-data">{% csrf_token %}
                     <div id="div_id_issue_type" class="form-group  ">
                         <label for="id_issue_type" class="control-label required-field ">
                             Issue type
                         </label>
-                        <h2>Service</h2>
+                        <h2 class="helpdesk small-size">Service Request</h2>
                     </div>
                     <div id="div_id_title" class="form-group  ">
                         <label for="id_title" class="control-label required-field ">
@@ -49,8 +49,8 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="form-inline btn btn-warning text-white">Submit</button>
-                    <a href="/services/" class="form-inline btn btn-warning text-white"> Back
+                    <button type="submit" class="form-inline btn btn-dark text-white">Submit</button>
+                    <a href="/services/" class="form-inline btn btn-dark text-white"> Back
     </a>
                 </form>
             </div>

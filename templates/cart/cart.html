@@ -3,10 +3,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <h1>Your cart</h1>
+                <h1 class="helpdesk">Your cart</h1>
                 {% if count %}
-                <div class="card mt-5">
-                    <div class="card-header jenter">
+                <div class="card border-danger mt-5">
+                    <div class="helpdesk card-header jenter">
                         Summary
                     </div>
                     <div class="card-body ">
@@ -67,8 +67,8 @@
                         {% endif %}
                     </div>
                     <div style="background-color: whitesmoke">
-                        <div class="form-group">
-                            <h3 class="float-left ml-4">Total: $ {{total}} </h3>
+                        <div class="forma form-group">
+                            <h3 class=" helpdesk float-left ml-4">Total: $ {{total}} </h3>
                             <a href="/cart/checkout/" class="float-right btn btn-success mr-5" role="button" required>Checkout <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
                         </div>
                     </div>

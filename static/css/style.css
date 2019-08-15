@@ -3,13 +3,35 @@
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
 
-    }
+}
 
 #title {
      padding-top: 3vh;
-    }
+}
 
 
-test
+.donation {
+    width: 14vh;
+}
+
+#forms {
+    padding: 40px;
+}
 
 
+.forma {
+    padding-top: 20px;
+    padding-bottom: 40px;
+    margin-bottom: 20px;
+}
+
+
+.small-size {
+
+    font-size: x-large;
+
+}
+
+.test2 {
+    height: 400px;
+}
