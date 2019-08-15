@@ -29,7 +29,6 @@ def Blog_Post_Detail_Page(request, post_id):
             obj.views += 1
             obj.save()
             BlogStats(blog=obj, user=request.user, views=1).save()
-
     context = {"Blog": obj, "title": "Detail", "comments": comments, "voted": voted}
     return render(request, template_name, context)
 
