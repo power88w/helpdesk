@@ -61,7 +61,7 @@
 
         <ul class="pagination">
             <div class='container'>
-                {% for comment in comments %} {% include 'hardware\detail-comment.html' with comment=comment truncate=True detail=False %} {% endfor %}
+                {% for comment in comments %} {% include 'hardware/detail-comment.html' with comment=comment truncate=True detail=False %} {% endfor %}
             </div>
         </ul>
         <nav aria-label="comment pagination" class="mt-5">
