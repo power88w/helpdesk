@@ -78,8 +78,6 @@ As IT:
 - activate virtual environment.
 - python manage.py runserver 
 
-### Contents
-* Payment Form on checkout page was copied from codeinstitute tutorial.
 
 ### Media
 * Photos come from google without copyright.
@@ -87,7 +85,7 @@ As IT:
 ## Clone the project:
 
 ```
-git clone https://github.com/power88w/CookBook.git
+git clone https://github.com/power88w/Helpdesk.git
 ```
 
 ## Author
