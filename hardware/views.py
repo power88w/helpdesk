@@ -33,6 +33,7 @@ def Blog_Post_Detail_Page(request, post_id):
     return render(request, template_name, context)
 
 
+
 ################# CREATE BLOG ##############
 
 @login_required(login_url='/login/accounts/login')

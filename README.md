@@ -3,8 +3,8 @@
 
 # IT Ticketing Web Application
     Ticketing system supports and helps you to better manage your 
-    help desk processes from first contact to resolution. H
-    elp ticketing system includes everything you need for ticket management including:
+    help desk processes from first contact to resolution. 
+    Help ticketing system includes everything you need for ticket management including:
 
 ## UX
 As a user (employee)
