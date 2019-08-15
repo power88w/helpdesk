@@ -19,7 +19,7 @@ def signup(request):
         if form.is_valid():
             user = form.save(commit=False)
             print(form)
-            user.is_active = False
+            user.is_active = True
             user.save()
             current_site = get_current_site(request)
             mail_subject = 'Activate your blog account.'
@@ -34,7 +34,7 @@ def signup(request):
                 mail_subject, message, to=[to_email]
             )
             email.send()
-            return HttpResponse('Please confirm your email address to complete the registration')
+            return redirect('/')
     else:
         form = SignupForm()
     return render(request, 'registration/registration.html', {'form': form})
