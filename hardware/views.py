@@ -48,7 +48,7 @@ def Blog_Post_Create_Page(request):
         else:
             BlogPost(title=title, priority=pr, content=content, user=request.user).save()
         return redirect('/hardware/')
-    template_name = "hardware/create.html"
+    template_name = "create.html"
     context = {}
     return render(request, template_name, context)
 
@@ -126,3 +126,23 @@ def Blog_Like(request, post_id):
         a.save()
         session.objects.create(user=request.user, name=from_blog).save()
     return redirect("/hardware/" + str(from_blog.id) + "/")
+
+############# Donate ############
+@login_required(login_url='/login/accounts/login')
+def Donate(request):
+    template = "blog/donate.html"
+    prev=0
+    if request.POST:
+        try:
+            a=fbp.objects.create(title="donate")
+            session.objects.create(user=request.user, name=a,rate=request.POST.get("money"))
+            return redirect("/cart/")
+        except IntegrityError:
+            a=fbp.objects.get(title="donate")
+            prev=a.value
+            a.delete()
+            a=fbp.objects.create(title="donate")
+            session.objects.create(user=request.user, name=a,rate=request.POST.get("money"))
+            return redirect("/cart/")
+    context = {"pre_val":prev}
+    return render(request,template,context)

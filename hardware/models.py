@@ -42,11 +42,10 @@ class BlogPost(models.Model):
         return self.title
 
 class BlogComment(models.Model):
-
     Comment = models.TextField(null = True, blank = True)
-    user    = models.ForeignKey(User,related_name='f_poster',default =1,
+    user = models.ForeignKey(User,related_name='f_poster',default =1,
               on_delete=models.CASCADE)
-    Blog    = models.ForeignKey(BlogPost,on_delete=models.CASCADE)
+    Blog = models.ForeignKey(BlogPost,on_delete=models.CASCADE)
     posted_time = models.DateTimeField(auto_now=False, auto_now_add=True)
     def __str__(self):
         return ("Comment_"+str(self.Blog)+"_"+str(self.user))
