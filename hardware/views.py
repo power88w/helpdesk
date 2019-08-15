@@ -12,7 +12,8 @@ from django.db import IntegrityError
 
 def Blog_Post_Detail_Page(request, post_id):
     obj = get_object_or_404(BlogPost, id=post_id)
-    com_obj = BlogComment.objects.filter(Blog=obj)
+    # com_obj = BlogComment.objects.filter(Blog=obj)
+    com_obj = BlogComment.objects.get_queryset().order_by('id')
     paginator = Paginator(com_obj, 5)
     page = request.GET.get('page')
     comments = paginator.get_page(page)
