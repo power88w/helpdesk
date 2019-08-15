@@ -20,6 +20,11 @@ As IT:
 - I can easily locate the problem
 - Observe the progress of your work based on graphs
 
+### Admin Panel Access
+
+- login: test
+- pass: test12345
+
 ### Desktop
 
 <img src="https://github.com/power88w/helpdesk/blob/master/media/test.JPG"> <br> 
